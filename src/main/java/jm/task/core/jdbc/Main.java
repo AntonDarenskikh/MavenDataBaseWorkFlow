@@ -3,8 +3,10 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
+import java.sql.SQLException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         UserService userService = new UserServiceImpl();
 
         userService.createUsersTable();
@@ -15,7 +17,7 @@ public class Main {
         userService.saveUser("Name4", "LastName4", (byte) 38);
 
         userService.removeUserById(1);
-        userService.getAllUsers();
+        userService.getAllUsers().stream().forEach(System.out::println);
         userService.cleanUsersTable();
         userService.dropUsersTable();
     }
